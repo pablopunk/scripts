@@ -1,9 +1,8 @@
 #!/bin/bash
 #
 # Copyright (c) Pablo Varela 2016
-# Original author of the code and 
-# code explanation can be found in
-# the next link:
+# Original author of the git code and code
+# explanation can be found in the next link:
 # http://stackoverflow.com/questions/3497123/run-git-pull-over-all-subdirectories
 #
 # This script just navigates into 
