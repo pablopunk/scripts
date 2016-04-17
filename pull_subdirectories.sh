@@ -12,6 +12,14 @@
 
 branch="master"
 
+function makepull {
+  find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin $branch \;
+}
+
+function maketest {
+  find . -type d -depth 1 -exec echo git --git-dir={}/.git --work-tree=$PWD/{} status \;
+}
+
 numargs=$#
 if [ $numargs -eq 0 ]; then # DEFAULT: executes with no stderr
   exec 2> /dev/null
@@ -20,7 +28,7 @@ fi
 for ((i=0 ; i < numargs ; i++)); do
   if [ "$1" = "-t" ]; then   # TEST MODE: just shows the
                              # commands that would be executed
-    find . -type d -depth 1 -exec echo git --git-dir={}/.git --work-tree=$PWD/{} status \;
+    maketest
   elif [ "$1" = "-v" ]; then # VERBOSE
     echo "-- verbose mode --"; exec 2> /dev/null
   elif [ "$1" = "-b" ] && [ ! -z "$2" ]; then # select default branch
@@ -32,5 +40,5 @@ for ((i=0 ; i < numargs ; i++)); do
   shift
 done
 
-find . -type d -depth 1 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;
+makepull
 
