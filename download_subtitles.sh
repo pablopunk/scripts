@@ -2,20 +2,17 @@
 # 
 # Copyright (c) 2016 Pablo Varela
 #
+# Usage: ./download_subtitles.sh /path/to/videos/folder
 
-root="/home/pi/mnt/toshiba/torrents"
+if [ ! $# -eq 1 ]; then
+  echo "Usage: ./download_subtitles.sh /path/to/videos/folder"
+  exit 1
+fi
+
+root="$1"
 lang="es"
 
-function download {
-  subliminal download ./* -l $lang
-}
+subliminal download $root -l $lang
 
-cd $root
-
-for dir in ./*; do # for each subdirectory (depth=1)
-  cd $dir
-  download # try download with all files
-  cd ..
-done
 
 
