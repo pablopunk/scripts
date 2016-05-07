@@ -10,6 +10,8 @@
 $secret = 'puthereyourverysecretstring'; // CHANGE THIS
 $deploy_dir = '/var/www/'; // Root directory
 $branch = 'master'; // Branch to deploy
+$output = ''; // Buffer to save exec output
+$ret = 0; // Exec return value 
 
 // print new msg to log file
 function logs($msg) {
@@ -31,5 +33,10 @@ if(! isset($_GET["sat"])) {
 logs('Attempting autodeploy...');
 
 chdir($deploy_dir); // cd dir
-exec('git checkout origin/'.$branch.' -- . && git pull origin '.$branch); // pull
+exec('git checkout origin/'.$branch.' -- . && git pull origin '.$branch, $output, $ret); // pull
+
+if ($ret != 0) {
+	logs('Error:\n'.$output.'\n');
+	exit(1);
+}
 
