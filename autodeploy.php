@@ -7,6 +7,7 @@
 // Place the script in your server
 // so the webhook can access it
 
+$repoName = 'myProject'; // Name of the project
 $secret = 'puthereyourverysecretstring'; // CHANGE THIS
 $deploy_dir = '/var/www/'; // Root directory
 $branch = 'master'; // Branch to deploy
@@ -16,7 +17,7 @@ $ret = 0; // Exec return value
 // print new msg to log file
 function logs($msg) {
     $log_file = 'autodeploy.log';
-    $msg = date('Y-m-d H:i:s -> ').$msg."\n";
+    $msg = date('Y-m-d H:i:s ['.$repoName.'] -> ').$msg."\n";
     file_put_contents ( $log_file , $msg, FILE_APPEND | LOCK_EX );
 }
 
