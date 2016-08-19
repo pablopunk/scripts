@@ -16,8 +16,9 @@ $ret = 0; // Exec return value
 
 // print new msg to log file
 function logs($msg) {
+    global $repoName;
     $log_file = 'autodeploy.log';
-    $msg = date('Y-m-d H:i:s ['.$repoName.'] -> ').$msg."\n";
+    $msg = date('Y-m-d H:i:s').' ['.$repoName.'] -> '.$msg."\n";
     file_put_contents ( $log_file , $msg, FILE_APPEND | LOCK_EX );
 }
 
