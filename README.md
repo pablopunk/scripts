@@ -1,3 +1,3 @@
 # scripts
 
-collection of random scripts I made
+### Collection of useful scripts I made.
