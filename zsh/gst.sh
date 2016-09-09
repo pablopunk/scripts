@@ -1,4 +1,15 @@
 #!/usr/bin/zsh
+#
+# Copyright 2016 Pablo Varela
+# 
+# This script returns the current directory name
+# If it's a git repo, it will return the name but
+# with different colors, depending on the status
+#
+# It's used for the PROMPT variable in zshrc:
+# EXAMPLE:
+# PROMPT='$fg[red](%m) $(gst)> '
+#
 
 function getout {
 	echo -n $fg_no_bold[white]
