@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 #
 # Copyright 2016 Pablo Varela
 # 
