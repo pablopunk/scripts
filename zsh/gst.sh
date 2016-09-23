@@ -27,8 +27,10 @@ repo=$(echo $directory | rev | cut -d'/' -f1 | rev)
 [ ! -d .git ] && echo -n "%{$fg[blue]%}$repo" && getout
 
 gitstatus=$(git status --porcelain | cut -d' ' -f2)
+branch="$(git symbolic-ref HEAD 2>/dev/null)" || branch="(unnamed branch)"
+branch=${branch##refs/heads/}
 
-[ -z $gitstatus ] && echo -n "%{$fg_bold[cyan]%}$repo ✓ " && getout
-[ $gitstatus = "D" ] && echo -n "%{$fg_bold[red]%}$repo - " && getout
-[ $gitstatus = "M" ] && echo -n "%{$fg_bold[yellow]%}$repo • " && getout
-echo -n "%{$fg_bold[green]%}$repo + " && getout
+[ -z $gitstatus ] && echo -n "%{$fg_bold[cyan]%}$repo ($branch✓)" && getout
+[ $gitstatus = "D" ] && echo -n "%{$fg_bold[red]%}$repo ($branch-)" && getout
+[ $gitstatus = "M" ] && echo -n "%{$fg_bold[yellow]%}$repo ($branch•)" && getout
+echo -n "%{$fg_bold[green]%}$repo ($branch+)" && getout
