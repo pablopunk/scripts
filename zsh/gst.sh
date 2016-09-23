@@ -28,9 +28,9 @@ repo=$(echo $directory | rev | cut -d'/' -f1 | rev)
 
 gitstatus=$(git status --porcelain | cut -d' ' -f2)
 
-[ -z $gitstatus ] && echo -n "%{$fg_bold[cyan]%}$repo" && getout
+[ -z $gitstatus ] && echo -n "%{$fg_bold[cyan]%}✓$repo" && getout
 [ $gitstatus = "D" ] && echo -n "%{$fg_bold[red]%}-$repo" && getout
 [ $gitstatus = "M" ] && echo -n "%{$fg_bold[yellow]%}·$repo" && getout
-echo -n "%{$fg_bold[green]%}$repo" && getout
+echo -n "%{$fg_bold[green]%}+$repo" && getout
 
 echo "WTF"
