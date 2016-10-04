@@ -23,12 +23,12 @@ function getout {
 autoload -Uz colors && colors
 # Colors
 cleanColor="%{$fg_bold[cyan]%}"
-changeColor="%{$fg_bold[yellow]%}"
+changedColor="%{$fg_bold[yellow]%}"
 newColor="%{$fg_bold[green]%}"
 delColor="%{$fg_bold[red]%}"
 # Symbols
 cleanSymbol="✓"
-changeSymbol="•"
+changedSymbol="•"
 newSymbol="+"
 delSymbol="-"
 
@@ -37,15 +37,28 @@ repo=$(echo $directory | rev | cut -d'/' -f1 | rev)
 
 [ ! -d .git ] && echo -n "%{$fg[blue]%}$repo" && getout
 
-gitstatus=$(git status --porcelain | cut -d' ' -f2)
-branch="$(git symbolic-ref HEAD 2>/dev/null)" || branch="(unnamed branch)"
+gitstatus=($(git status --porcelain | cut -d' ' -f2)) # array of lines
+branch="$(git symbolic-ref HEAD 2>/dev/null)" || branch="unnamed branch"
 branch=${branch##refs/heads/}
 
-# clean
-[ -z $gitstatus ] && echo -n "$cleanColor$repo ($branch$cleanSymbol)" && getout
-# deleted
-[ $gitstatus = "D" ] && echo -n "$delColor$repo ($branch$delSymbol)" && getout
-# modified
-[ $gitstatus = "M" ] && echo -n "$changeColor$repo ($branch$changeSymbol)" && getout
-# new
-echo -n "$newColor$repo ($branch$newSymbol)" && getout
+clean=0; del=0; changed=0; new=0;
+
+for line in $gitstatus; do
+	if [ "$line" = "D" ]; then
+		del=1
+	elif [ "$line" = "M" ]; then
+		changed=1
+	else
+		new=1
+	fi
+done
+
+[ -z "$line" ] && clean=1
+
+[ $clean -eq 1 ]   && branch="$branch$cleanSymbol"   && echo -n $cleanColor
+[ $del -eq 1 ]     && branch="$branch$delSymbol"     && echo -n $delColor
+[ $new -eq 1 ]     && branch="$branch$newSymbol"     && echo -n $newColor
+[ $changed -eq 1 ] && branch="$branch$changedSymbol" && echo -n $changedColor
+
+# output
+echo -n "$repo ($branch)" && getout
