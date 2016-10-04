@@ -21,6 +21,17 @@ function getout {
 }
 
 autoload -Uz colors && colors
+# Colors
+cleanColor="%{$fg_bold[cyan]%}"
+changeColor="%{$fg_bold[yellow]%}"
+newColor="%{$fg_bold[green]%}"
+delColor="%{$fg_bold[red]%}"
+# Symbols
+cleanSymbol="✓"
+changeSymbol="•"
+newSymbol="+"
+delSymbol="-"
+
 directory=$(pwd)
 repo=$(echo $directory | rev | cut -d'/' -f1 | rev)
 
@@ -30,7 +41,11 @@ gitstatus=$(git status --porcelain | cut -d' ' -f2)
 branch="$(git symbolic-ref HEAD 2>/dev/null)" || branch="(unnamed branch)"
 branch=${branch##refs/heads/}
 
-[ -z $gitstatus ] && echo -n "%{$fg_bold[cyan]%}$repo ($branch✓)" && getout
-[ $gitstatus = "D" ] && echo -n "%{$fg_bold[red]%}$repo ($branch-)" && getout
-[ $gitstatus = "M" ] && echo -n "%{$fg_bold[yellow]%}$repo ($branch•)" && getout
-echo -n "%{$fg_bold[green]%}$repo ($branch+)" && getout
+# clean
+[ -z $gitstatus ] && echo -n "$cleanColor$repo ($branch$cleanSymbol)" && getout
+# deleted
+[ $gitstatus = "D" ] && echo -n "$delColor$repo ($branch$delSymbol)" && getout
+# modified
+[ $gitstatus = "M" ] && echo -n "$changeColor$repo ($branch$changeSymbol)" && getout
+# new
+echo -n "$newColor$repo ($branch$newSymbol)" && getout
