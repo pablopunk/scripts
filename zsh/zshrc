@@ -14,8 +14,22 @@ SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-# PATH
+# VARS
 export PATH="$PATH:/opt/bin"
+setopt interactivecomments # allow interactive comments
+which subl > /dev/null
+if [ $? -eq 0 ]; then
+	export EDITOR="subl -w"
+else
+	export EDITOR="vim"
+fi
+
+# ALIASES
+alias g='git'
+alias gt='git status'
+alias gl='git pull'
+alias gp='git push'
+alias glog'git log --oneline --decorate --color --graph'
 
 # PROMPT
 setopt PROMPT_SUBST
