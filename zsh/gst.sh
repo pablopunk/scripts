@@ -22,9 +22,9 @@ function getout {
 
 autoload -Uz colors && colors
 # Colors
-cleanColor="%{$fg_bold[cyan]%}"
+cleanColor="%{$fg_bold[green]%}"
 changedColor="%{$fg_bold[yellow]%}"
-newColor="%{$fg_bold[green]%}"
+newColor="%{$fg_bold[cyan]%}"
 delColor="%{$fg_bold[red]%}"
 # Symbols
 cleanSymbol="✓"
@@ -35,7 +35,7 @@ delSymbol="-"
 directory=$(pwd)
 repo=$(echo $directory | rev | cut -d'/' -f1 | rev)
 
-[ ! -d .git ] && echo -n "%{$fg[blue]%}$repo" && getout
+[ ! -d .git ] && echo -n "%{$fg[green]%}$repo" && getout
 
 gitstatus=($(git status --porcelain | cut -d' ' -f2)) # array of lines
 branch="$(git symbolic-ref HEAD 2>/dev/null)" || branch="unnamed branch"
