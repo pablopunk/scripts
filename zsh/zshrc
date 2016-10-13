@@ -29,12 +29,12 @@ alias g='git'
 alias gt='git status'
 alias gl='git pull'
 alias gp='git push'
-alias glog'git log --oneline --decorate --color --graph'
+alias glog='git log --oneline --decorate --color --graph'
 
 # PROMPT
 setopt PROMPT_SUBST
 autoload -Uz colors && colors
-PROMPT='%{$fg[red]%}(%m) $(gst)> '
+PROMPT='%{$fg[cyan]%}(%m) $(gst)> '
 
 # Bind Keys to History 
 autoload -U history-search-end
