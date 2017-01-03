@@ -28,7 +28,7 @@ cp sublime/Default\ \(OSX\).sublime-mousemap ~/Library/Application\ Support/Subl
                 "phpcs": {
                     "@disable": false,
                     "args": [],
-                    "excludes": [],
+                    "excludes": ["*.html.php"],
                     "standard": "PSR2"
                 }
             }
