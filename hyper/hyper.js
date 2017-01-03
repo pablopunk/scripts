@@ -1,25 +1,25 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 13,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+    fontFamily: '"Source Code Pro for Powerline", "SF Mono", "Fira Code Light", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.75)',
+    cursorColor: 'rgba(248,28,229,0.8)',
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
-    cursorShape: 'BLOCK',
+    cursorShape: 'UNDERLINE',
 
     // color of the text
     foregroundColor: '#fff',
 
     // terminal background color
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(0,0,0,1)',
 
     // border color (window, tabs)
-    borderColor: '#333',
+    borderColor: 'rgba(0,0,0,0)',
 
     // custom css to embed in the main window
     css: '',
@@ -54,9 +54,25 @@ module.exports = {
 
     // the shell to run when spawning a new session (i.e. /usr/local/bin/fish)
     // if left empty, your system's login shell will be used by default
-    shell: ''
+    shell: '',
 
-    // for advanced config flags please refer to https://hyperterm.org/#cfg
+    // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
+    // by default ['--login'] will be used
+    shellArgs: ['--login'],
+
+    // for environment variables
+    env: {},
+
+    // set to false for no bell
+    bell: 'SOUND',
+
+    // if true, selected text will automatically be copied to the clipboard
+    copyOnSelect: false
+
+    // URL to custom bell
+    // bellSoundURL: 'http://example.com/bell.mp3',
+
+    // for advanced config flags please refer to https://hyper.is/#cfg
   },
 
   // a list of plugins to fetch and install from npm
@@ -66,12 +82,17 @@ module.exports = {
   //   `@company/project`
   //   `project#1.0.1`
   plugins: [
-    'hyperborder',
-    'hyperterm-one-light'
+    //'hyperterm-atom-dark',
+    //"hyper-dark-dracula",
+    //"hyper-simple-vibrancy"
+    //"spongebob"
+    //'hyperborder'
+    //'hyperpanic'
+    'hyper-criollo'
   ],
 
   // in development, you can create a directory under
-  // `~/.hyperterm_plugins/local/` and include it here
+  // `~/.hyper_plugins/local/` and include it here
   // to load it and avoid it being `npm install`ed
   localPlugins: []
 };
