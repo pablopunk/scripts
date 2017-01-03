@@ -1,21 +1,14 @@
-" Inicio de la configuracion de Bundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" Colores y sintaxis
+set nocompatible
+filetype off
+" syntax and colors
 syntax on
-
-" Numeros de linea
+" line numbers
 set number
-
-" Indentado
-set smartindent
-set tabstop=2
-set shiftwidth=2
+" 2 spaces indent
 set expandtab
-
-" Prevenir que la tecla Delete no funcione correctamente
+set shiftwidth=2
+set softtabstop=2
+" prevent not-working delete key
 set backspace=indent,eol,start
-
-" Corregir el autoindent al pegar
+" paste from other applications without messing the indent
 set paste
