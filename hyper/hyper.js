@@ -19,7 +19,7 @@ module.exports = {
     backgroundColor: 'rgba(34,34,34,.7)',
 
     // border color (window, tabs)
-    borderColor: '#333',
+    borderColor: '#1abc9c',
 
     // custom css to embed in the main window
     css: '',
