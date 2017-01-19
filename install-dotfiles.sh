@@ -5,5 +5,5 @@ do
   bash $D/install.sh
 done
 
-ln -svf $PWD/dotfiles ~/.dotfiles
+ln -snvf $PWD/dotfiles ~/.dotfiles
 
