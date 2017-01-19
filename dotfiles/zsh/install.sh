@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name='zsh.rc'
+file_name='zshrc'
 dir=''
 
 function go_to_script_dir {
