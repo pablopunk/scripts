@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file_name='vim.rc'
+file_name='vimrc'
 dir=''
 
 function go_to_script_dir {
