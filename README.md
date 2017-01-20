@@ -7,7 +7,7 @@
 You can install all dotfiles at once:
 
 ```shell
-bash install-dotfiles.sh
+bash dotfiles/install.sh
 ```
 
 Or just the one you want:
