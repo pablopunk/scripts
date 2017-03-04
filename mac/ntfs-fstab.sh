@@ -5,4 +5,4 @@ if [ ! $# -eq 1 ]; then
   exit 1
 fi
 
-echo "LABEL=$1 none ntfs rw,auto,nobrowse" | sudo tee /etc/fstab
+echo "LABEL=$1 none ntfs rw,auto,nobrowse" | sudo tee -a /etc/fstab
