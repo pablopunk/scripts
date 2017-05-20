@@ -14,7 +14,7 @@ normal=$(tput sgr0)
 cleanSymbol="\033[39m✓"   # foreground
 changedSymbol="\033[33m•" # yellow
 newSymbol="\033[34m+"     # blue
-delSymbol="\033[31m-"     # red
+delSymbol="\033[31m⨯"     # red
 
 repo=${PWD##*/}
 
