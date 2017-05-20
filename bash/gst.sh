@@ -12,7 +12,7 @@ normal=$(tput sgr0)
 
 # Symbols
 cleanSymbol="\033[39m✓"   # foreground
-changedSymbol="\033[43m•" # yellow
+changedSymbol="\033[33m•" # yellow
 newSymbol="\033[34m+"     # blue
 delSymbol="\033[31m-"     # red
 
