@@ -3,51 +3,52 @@
 # TODO: test this script in an actual fresh install of the lastest OS X
 echo " !! WARNING: this script hasn't been tested yet. Use it at your own risk"
 
-# args
-if [ $# -eq 0 ]; then
-  exec 2> /dev/null
-elif [ "$1" = "-v" ]; then
-  echo " -- Verbose mode --"
-else
-  echo " Usage: ./fresh-install.sh [-v]"
-  exit 1
-fi
+ld="\x01$(tput bold)\x02"
+normal="\x01$(tput sgr0)\x02"
+cyan="\x01\033[36m\x02"
+green="\x01\033[32m\x02"
+step_symbol="↪"
 
-# checks for command line tools
-gcc -v
-if [ $? -ne 0 ]; then
-  echo " !! Command line tools are not installed."
-  echo " -> Installing..."
-  xcode-select --install
-  if [ $? -ne 0 ]; then
-    echo " ** Error installing command line tools :("
-    echo "    if they are installed please Agree the Xcode license opening Xcode.app"
-    exit 2
-  fi
-fi
-echo " -> Command line tools are installed"
+function pr {
+  echo -e "$cyan$bold$step_symbol $1$normal"
+}
 
-# installs oh-my-zsh
-echo " -> Installing oh-my-sh.."; sleep 1
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# Install command line tools
+pr "Installing command line tools"
+xcode-select --install
 
-# installs homebrew
-echo " -> Installing homebrew.."; sleep 1
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install homebrew
 
-# installs wget,vim
-echo " -> Installing some utilities.."; sleep 1
+pr "Installing homebrew.."/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# install homebrew cask
+brew tap caskroom/cask
+
+pr "Installing homebrew cask.."
+
+# Install wget,vim
+
+pr "Installing some utilities.."
 brew install vim wget
 
-# installs powerline fonts
+# Install nodejs
+
+pr "Installing nodejs.."
+brew install node
+
+# Install bashy
+
+pr "Installing bashy.."
+npm install --global bashy
+
+# Install powerline fonts
+pr "Installing powerline fonts"
 git clone https://github.com/powerline/fonts /tmp/fonts
 /tmp/fonts/install.sh
 
-# downloads vimrc/zshrc and terminal theme
-echo " -> Installing some configurations.."; sleep 1
-sh -c "wget https://raw.githubusercontent.com/pablopunk/mac-config/master/vim/vimrc -O ~/.vimrc"
-sh -c "wget https://raw.githubusercontent.com/pablopunk/mac-config/master/zsh/zshrc -O ~/.zshrc"
-sh -c "wget https://raw.githubusercontent.com/pablopunk/mac-config/master/terminal-themes/Midnight.terminal -O Midnight.terminal"
-sh -c "wget https://raw.githubusercontent.com/pablopunk/mac-config/master/terminal-themes/Daylight.terminal -O Daylight.terminal"
-open Midnight.terminal && sleep 1 && rm Midnight.terminal
-open Daylight.terminal && sleep 1 && rm Daylight.terminal
+# Dotfiles
+pr "Configuring dotfiles"
+git clone https://github.com/pablopunk/dotfiles ~/.dotfiles
+~/.dotfiles/install.sh
+
+echo -e "$green$bold ✓ DONE!$normal"
